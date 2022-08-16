@@ -83,8 +83,7 @@ rov::RovTelemetry Telemetry;
 int manip_speed = 100;
 int manip_pos = -20;
 long long t_lm = 0;
-bool link_dead_notification = false;
-bool link_up_notification = false;
+bool link_up = false;
 uint16_t debug_type = 0x00000000;
 
 
@@ -180,17 +179,15 @@ void HighROV::run() {
 		using namespace pwm;
 		serialHandler();
 		AnalogSensors::update();
-		if (Ethernet.linkStatus() == LinkON && !link_up_notification) {
+		if (Ethernet.linkStatus() == LinkON && !link_up) {
 			SerialUSB.println("Link status: On");
-			link_up_notification = true;
-			link_dead_notification = false;
+			link_up = true;
 		}
-		else if (Ethernet.linkStatus() == LinkOFF && !link_dead_notification) {
+		else if (Ethernet.linkStatus() == LinkOFF && link_up) {
 			SerialUSB.println("Link status: Off. This usually indicates problems w/cable");
-			link_dead_notification = true;
-			link_up_notification = false;
+			link_up = false;
 		}
-		if ((!link_dead_notification && (millis() >= t_lm + 500)) || millis() >= t_lm + 5000){//if link is up -> check every .5 of a second, otherwise check once every 5 seconds
+		if ((link_up && (millis() >= t_lm + 500)) || millis() >= t_lm + 5000){//if link is up -> check every .5 of a second, otherwise check once every 5 seconds
 			byte status = Ethernet.maintain();
 			switch(status){
 				case 0:
@@ -205,7 +202,7 @@ void HighROV::run() {
 					SerialUSB.println("DHCP rebind failed, check the configuration of your DHCP server");
 					break;
 				case 4:
-					if(link_dead_notification)
+					if(link_up)
 					{
 						SerialUSB.println("DHCP rebind detected, this almost certainly will break things");
 					}

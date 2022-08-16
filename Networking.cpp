@@ -73,24 +73,24 @@ void Networking::write(uint8_t * buffer, int size) {
     Udp.endPacket();
 }
 
+String Networking::ip_decoder(uint32_t addr){
+    byte ip_buf[4]; // 111.222.333.444
+	for(int i = 3; i >= 0; i--){ //byte segment
+		for(int j = 7; j >=0; j--){ //bit
+			ip_buf[i] += bitRead(addr, i*8+j) * pow(2,j); //bit read order - LSB first -> reading MSB first
+		}
+	}
+    return String(ip_buf[0]) + "." + String(ip_buf[1]) + "." + String(ip_buf[2]) + "." + String(ip_buf[3]) + "." ;
+}
+
 String Networking::status() {
     using namespace config::networking;
 
-    String ip_string;
-    byte ip_buf[4]; // 111.222.333.444
-    uint32_t ip_raw;
-    ip_raw = Ethernet.localIP();
-    for(byte i = 3; i >= 0; i--){ //byte segment
-        for(byte j = 7; j >=0; j--){ //bit
-            ip_buf[i] += bitRead(ip_raw, i*8+j) * pow(2,j); //bit read order - LSB first -> reading MSB first
-        }
-    }
-
     return "\nTarget IP:        " + String(selfip[0]) + "." + String(selfip[1]) + "." + String(selfip[2]) + "." + String(selfip[3]) + "\n"\
-           "Current IP:         " + ip_string + "\n"\
-           "DNS server IP:      " + String(Ethernet.dnsServerIP(), BIN) + "\n"\
-           "Gateway IP:         " + String(Ethernet.gatewayIP(), BIN) + "\n"\
-           "Subnet mask:        " + String(Ethernet.subnetMask(), BIN) + "\n"\
+           "Current IP:         " + ip_decoder(Ethernet.localIP()) + "\n"\
+           "DNS server IP:      " + ip_decoder(Ethernet.dnsServerIP()) + "\n"\
+           "Gateway IP:         " + ip_decoder(Ethernet.gatewayIP()) + "\n"\
+           "Subnet mask:        " + ip_decoder(Ethernet.subnetMask()) + "\n"\
            "Link status:        " + (Ethernet.linkStatus() ? "ON\n" : "OFF\n");
 
 }

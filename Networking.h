@@ -4,12 +4,13 @@
 #include <Ethernet.h>
 #include <EthernetUdp.h>
 #include "Data.h"
+#include "sys/_stdint.h"
 
 class Networking
 {
 public:
     Networking();
-
+    static String ip_decoder(uint32_t addr);
     static void init();
     static void read_write_udp(rov::RovTelemetry &tel, rov::RovControl &ctrl);
     static String status();
