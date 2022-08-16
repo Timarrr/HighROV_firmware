@@ -163,9 +163,10 @@ void serialHandler(){
 	if(SerialUSB.available()){
 		String msg = SerialUSB.readString();
 		msg.trim();
-		SerialUSB.print(msg=="reset" ? "Resetting the controller, please reconnect the debug cable or serial monitor if you want to continue debugging" : "");
-		if(msg=="reset")
+		if(msg=="reset"){
+			SerialUSB.print("Resetting the controller, please reconnect the debug cable or serial monitor if you want to continue debugging");
 			gracefulReset();
+		}
 		else
 		if(msg=="debug")
 			debugMenu();
