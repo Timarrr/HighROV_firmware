@@ -150,7 +150,7 @@ void debugMenu(){
 		int debug_curr = msg.toInt();
 		if(debug_curr==0) return;
 		if(debug_curr==8){
-			SerialUSB.println(neko);
+			SerialUSB.println("Hi, I'm your ROV's neko girl and I am responsible for debugging all of this!\n" + neko);
 			return;
 		}
 		if(debug_curr<0 || debug_curr>7){
