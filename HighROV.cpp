@@ -234,14 +234,6 @@ void HighROV::run() {
 		Telemetry.voltmeter = AnalogSensors::getVoltage();
 		Telemetry.cameraIndex = RotaryCameras::get_cam_index();
 
-		// SerialUSB.print("\tDepth: "); SerialUSB.print(Telemetry.depth);
-		// SerialUSB.print("\tTemp: "); SerialUSB.print(Telemetry.temperature);
-		// delay(50);
-
-		// // SerialUSB.print("\tYaw: "); SerialUSB.print(Telemetry.yaw);
-		// // SerialUSB.print("\tRoll: "); SerialUSB.print(Telemetry.roll);
-		// // SerialUSB.print("\tPitch: "); SerialUSB.print(Telemetry.pitch);
-		// SerialUSB.println();
 
 		Networking::read_write_udp(Telemetry, control);
 		if (!control.debugFlag) {
