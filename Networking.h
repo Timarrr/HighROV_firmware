@@ -10,7 +10,7 @@ class Networking
 {
 public:
     Networking();
-    static String ip_decoder(uint32_t addr);
+    static void maintain();
     static void init();
     static void read_write_udp(rov::RovTelemetry &tel, rov::RovControl &ctrl);
     static String status();

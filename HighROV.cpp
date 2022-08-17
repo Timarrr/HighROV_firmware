@@ -8,7 +8,6 @@
 #include "Manipulator.h"
 #include "Config.h"
 #include "IMUSensor.h"
-#include "USB/USBAPI.h"
 #include "AnalogSensors.h"
 
 String neko[] = {"\
@@ -90,9 +89,7 @@ rov::RovControl control;
 rov::RovTelemetry Telemetry;
 int manip_speed = 100;
 int manip_pos = -20;
-long long t_lm = 0;
-bool link_up = false;
-uint16_t debug_type = 0x00000000;
+uint8_t debug_type = 0b00000000;
 
 
 void HighROV::init() {
@@ -166,7 +163,8 @@ void debugMenu(){
 		SerialUSB.println("wrong input, please resend the input one number at a time");
 		return;
 	}
-	debug_type = bitToggle(debug_type, debug_curr - 1);
+	bitToggle(debug_type, debug_curr);
+	SerialUSB.println(debug_type);
 }
 
 void serialHandler(){  
@@ -178,11 +176,46 @@ void serialHandler(){
 			gracefulReset();
 		}
 		else
-		if(msg=="debug")
-			debugMenu();
-		else
-		SerialUSB.println("send \"reset\" for controller reset or \"debug\" for debug menu");
+			if(msg=="debug")
+				debugMenu();
+			else
+				SerialUSB.println("send \"reset\" for controller reset or \"debug\" for debug menu");
 	}
+}
+
+void debugHandler(){
+	if(bitRead(debug_type, 0)==1)//analog sensors debug
+		{
+			SerialUSB.println("[analog sensors debug]		Amperage:		" + String(AnalogSensors::getAmperage()) + "\n"\
+							 	 "                     			Voltage: 		" + String(AnalogSensors::getVoltage()));
+		}
+		if(bitRead(debug_type, 1)==1)//depth sensor debug
+		{
+			SerialUSB.println("[depth sensor debug] 			Depth:			" + String(AnalogSensors::getAmperage()) + "\n");
+		}
+		if(bitRead(debug_type, 2)==1)//IMU debug
+		{
+			SerialUSB.println("[IMU debug] 					Yaw/Roll/Pitch:	" + String(IMUSensor::getYaw(), 2) + "/" + String(IMUSensor::getRoll(),2) + "/" + String(IMUSensor::getPitch()));
+		}
+		if(bitRead(debug_type, 3)==1)//Manipulator debug
+		{
+			SerialUSB.println("[Manipulator debug] 			Position:		" + String(control.manipulatorOpenClose) + "\n"\
+								 "								Rotation:		" + String(control.manipulatorRotation));
+		}
+		if(bitRead(debug_type, 4)==1)//Networking debug
+		{
+			SerialUSB.println("[Networking debug]			");
+			Networking::status();
+		}
+		if(bitRead(debug_type, 5)==1)//Networking debug
+		{
+			SerialUSB.println("[Thrusters debug]				" + Thrusters::status);
+		}
+		if(bitRead(debug_type, 6)==1)//Reset debug
+		{
+			debug_type = 0x00000000;
+		}
+
 }
 
 void HighROV::run() {
@@ -190,47 +223,7 @@ void HighROV::run() {
 		using namespace pwm;
 		serialHandler();
 		AnalogSensors::update();
-		if (Ethernet.linkStatus() == LinkON && !link_up) {
-			SerialUSB.println("Link status: On");
-			link_up = true;
-		}
-		else if (Ethernet.linkStatus() == LinkOFF && link_up) {
-			SerialUSB.println("Link status: Off. This usually indicates problems w/cable");
-			link_up = false;
-		}
-		if ((link_up && (millis() >= t_lm + 500)) || millis() >= t_lm + 5000){//if link is up -> check every .5 of a second, otherwise check once every 5 seconds
-			byte status = Ethernet.maintain();
-			switch(status){
-				case 0:
-					break;
-				case 1:
-					SerialUSB.println("DHCP lease renew failed, check the configuration of your DHCP server");
-					break;
-				case 2:
-					SerialUSB.println("DHCP lease renew success");
-					break;
-				case 3:
-					SerialUSB.println("DHCP rebind failed, check the configuration of your DHCP server");
-					break;
-				case 4:
-					if(link_up)
-					{
-						SerialUSB.println("DHCP rebind detected, this almost certainly will break things");
-					}
-					else
-					{
-						String ip = "0.0.0.0";
-						uint32_t ip_raw = Ethernet.localIP();
-						SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the ROV if it is incorrect");
-					}
-					break;
-				default:
-					break;
-			}
-			t_lm = millis();
-		}
-//    SerialUSB.println(String(millis()));
-		
+		Networking::maintain();
 
 		Telemetry.yaw = IMUSensor::getYaw();
 		Telemetry.roll = IMUSensor::getRoll();
@@ -273,35 +266,8 @@ void HighROV::run() {
 		} else {
 				analogWrite(LED_BUILTIN, 255);
 		}
-		if(bitRead(debug_type, 0)==1)//analog sensors debug
-		{
-			SerialUSB.println("[analog sensors debug]		Amperage:		" + String(AnalogSensors::getAmperage()) + "\n"\
-							  "                   		  	Voltage: 		" + String(AnalogSensors::getVoltage()));
-		}
-		if(bitRead(debug_type, 1)==1)//depth sensor debug
-		{
-			SerialUSB.println("[depth sensor debug] 		Depth:			" + String(AnalogSensors::getAmperage()) + "\n");
-		}
-		if(bitRead(debug_type, 2)==1)//IMU debug
-		{
-			SerialUSB.println("[IMU debug] 					Yaw/Roll/Pitch:	" + String(IMUSensor::getYaw(), 2) + "/" + String(IMUSensor::getRoll(),2) + "/" + String(IMUSensor::getPitch()));
-		}
-		if(bitRead(debug_type, 3)==1)//Manipulator debug
-		{
-			SerialUSB.println("[Manipulator debug] 			Position:		" + (String) manip_pos);
-		}
-		if(bitRead(debug_type, 4)==1)//Networking debug
-		{
-			SerialUSB.println("[Networking debug]			" + Networking::status());
-		}
-		if(bitRead(debug_type, 5)==1)//Thrusters debug
-		{
-			SerialUSB.println("[Thrusters debug]\n" + Thrusters::status);
-		}
-		if(bitRead(debug_type, 6)==1)//Reset debug
-		{
-			debug_type = 0x00000000;
-		}
 
-		delay(5);
+		debugHandler();
+
 }
+
