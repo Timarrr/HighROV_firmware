@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include "variant.h"
 
+#define ISERIAL_MAX_LEN         1024
+
 namespace config {
     /* pinout */
     namespace pwm {
