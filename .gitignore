@@ -225,3 +225,5 @@ __vm/Upload.vmps.xml
 #CLang language server and compiler settings file
 .clangd
 compile_commands.json
+
+.git*

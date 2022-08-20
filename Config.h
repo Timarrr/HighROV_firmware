@@ -91,4 +91,16 @@ namespace config {
         constexpr double amperage_multiplier = 0.077821;
         constexpr double amperage_deflection = 512.0;
     } // namespace analog
+
+    namespace debug {
+        enum debug_type_bits{
+            analog_sensors = 0,
+            depth_sensor,
+            imu,
+            manipulator,
+            networking,
+            thrusters,
+            reset
+        };
+    }
 }

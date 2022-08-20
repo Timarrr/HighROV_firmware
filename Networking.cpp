@@ -121,7 +121,8 @@ void Networking::maintain(){
 				{
 					String ip = "0.0.0.0";
 					uint32_t ip_raw = Ethernet.localIP();
-					SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the ROV if it is incorrect");
+					SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the router and the ROV if it is incorrect\n" + \
+										 "If problem persists, check your router and PC's settings");
 				}
 				break;
 			default:

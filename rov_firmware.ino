@@ -10,7 +10,8 @@
 #include "HighROV.h"
 #include <time.h>
 
-bool debug_mode = 1; // change to 1 to enable waiting for serial connection for 2 secs
+bool wait_for_serial = 1; // change to 1 to enable waiting for serial connection for <wait_for_serial_time> millisecondssecs
+int wait_for_serial_time = 5000; //milliseconds
 
 
 void setup() {
@@ -22,16 +23,15 @@ void setup() {
 
     SerialUSB.begin(115200);
     unsigned int t_on = millis();
-
-    while(!SerialUSB && debug_mode){
-      if(millis() >= t_on + 2000){  
+    while(!SerialUSB && wait_for_serial){
+      if(millis() >= t_on + wait_for_serial_time){  
         break;
       }else{
         analogWrite(LED_BUILTIN, sin(millis() * 0.05) * 127 + 127);
         delay(1);
       }
     }
-    if(debug_mode){
+    if(wait_for_serial){
       delay(200);
     }
     // Serial.begin(115200);
