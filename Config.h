@@ -3,7 +3,8 @@
 #include "variant.h"
 
 #define ISERIAL_MAX_LEN         1024
-
+#ifndef CONFIG_H
+#define CONFIG_H
 namespace config {
     /* pinout */
     namespace pwm {
@@ -93,6 +94,10 @@ namespace config {
     } // namespace analog
 
     namespace debug {
+        extern uint8_t debug_mode;
+        constexpr bool standalone = 1;					//turns off most of the external devices, allowing "clean" initialisation without any connections 
+        constexpr bool force_ethernet_init = 0;		    //forcibly turns on the Ethernet controller present on the board. WARNING, the board can hang when initialising Ethernet controller without proper connection to external Ethernet device
+        constexpr bool force_depth_sensor_init = 0;   	//forcibly turns on the depth sensor. for it to work, you need to connect the secondary board with depth sensor present
         enum debug_type_bits{
             analog_sensors = 0,
             depth_sensor,
@@ -104,3 +109,4 @@ namespace config {
         };
     }
 }
+#endif

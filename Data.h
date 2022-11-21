@@ -3,6 +3,9 @@
 #ifndef _ROVDATATYPES_h
 #define _ROVDATATYPES_h
 
+#include "USB/USBAPI.h"
+#include <cstddef>
+#include <cstring>
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -63,22 +66,46 @@ namespace rov {
             WrongDataSize = 2,
         };
 
+        class RovControlError{
+            public:
+                RovControlErrorCode type = RovControlErrorCode::NoError;
+                char *description;
+                RovControlError(RovControlErrorCode _type, char* additional_info = nullptr){
+                    type = _type;
+                    switch (int(type)) {
+                        case 0:
+                            strcpy(description, "No error");
+                            break;
+                        case 1:
+                            strcpy(description, "CRC mismatch: ");
+                            break;
+                        case 2:
+                            strcpy(description, "Wrong data size ");
+                            break;
+                        default:
+                            strcpy(description, "Unidentified error: ");
+                            break;
+                    }
+                    strcat(description, additional_info);
+                }
+        };
+
         uint8_t header = 0;
         int8_t version = 0; // protocol version
 
         // v1 begin
-        int8_t axisX = 0; //! -100/100;
-        int8_t axisY = 0; //! -100/100;
-        int8_t axisZ = 0; //! -100/100;
-        int8_t axisW = 0; //! -100/100;
+        // int8_t axisX = 0; //! -100/100;
+        // int8_t axisY = 0; //! -100/100;
+        // int8_t axisZ = 0; //! -100/100;
+        // int8_t axisW = 0; //! -100/100;
         int8_t cameraRotation[2] = { 0, 0 };
         int8_t thrusterPower[10] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         uint8_t debugFlag = 0;
         int8_t manipulatorRotation = 0; //! -100/100
         int8_t manipulatorOpenClose = 0; //! -1 close/+1 open;
-        uint8_t regulators = 0; //! 1st bit - depth;
-        float desiredDepth = 0.0f;
-        float desiredYaw = 0.0f;
+        // uint8_t regulators = 0; //! 1st bit - depth;
+        // float desiredDepth = 0.0f;
+        // float desiredYaw = 0.0f;
 
         // v2 begin
         uint8_t cameraIndex = 0;
@@ -86,10 +113,10 @@ namespace rov {
         void resetData() {
             header = 0;
             version = 0;
-            axisX = 0;
-            axisY = 0;
-            axisZ = 0;
-            axisW = 0;
+            // axisX = 0;
+            // axisY = 0;
+            // axisZ = 0;
+            // axisW = 0;
             debugFlag = 0;
             thrusterPower[0] = 0;
             thrusterPower[1] = 0;
@@ -105,35 +132,35 @@ namespace rov {
             cameraRotation[0] = 0;
             cameraRotation[1] = 0;
             manipulatorOpenClose = 0;
-            regulators = 0;
-            desiredDepth = 0;
-            desiredYaw = 0;
+            // regulators = 0;
+            // desiredDepth = 0;
+            // desiredYaw = 0;
             cameraIndex = 0;
         }
 
-        RovControlErrorCode fromRovControlMsg(const uint8_t *msg, unsigned long size) {
+        void fromRovControlMsg(const uint8_t *msg, unsigned long size) {
             size_t i = 0;
             read_bytes(msg, i, header);
             read_bytes(msg, i, version);
             prvt::swap_endian_for(*this);
 
             if (size == 22) {
-                return fromRovControlMsgV1(msg, size);
+                fromRovControlMsgV1(msg, size);
             } else if (version == 2) {
-                return fromRovControlMsgV2(msg, size);
+                fromRovControlMsgV2(msg, size);
             }
 
             // return fromRovControlMsgV2(msg, size);
         }
 
-        RovControlErrorCode fromRovControlMsgV1(const uint8_t *msg, unsigned long size) {
+        void fromRovControlMsgV1(const uint8_t *msg, unsigned long size) {
             size_t i = 0;
             version = 1;
 
-            read_bytes(msg, i, axisX);
-            read_bytes(msg, i, axisY);
-            read_bytes(msg, i, axisZ);
-            read_bytes(msg, i, axisW);
+            // read_bytes(msg, i, axisX);
+            // read_bytes(msg, i, axisY);
+            // read_bytes(msg, i, axisZ);
+            // read_bytes(msg, i, axisW);
             read_bytes(msg, i, debugFlag);
             read_bytes(msg, i, thrusterPower[0]);
             read_bytes(msg, i, thrusterPower[1]);
@@ -145,8 +172,8 @@ namespace rov {
             read_bytes(msg, i, cameraRotation[0]);
             read_bytes(msg, i, cameraRotation[1]);
             read_bytes(msg, i, manipulatorOpenClose);
-            read_bytes(msg, i, regulators);
-            read_bytes(msg, i, desiredDepth);
+            // read_bytes(msg, i, regulators);
+            // read_bytes(msg, i, desiredDepth);
 
             uint16_t crc = 0;
             read_bytes(msg, i, crc);
@@ -157,19 +184,17 @@ namespace rov {
             int16_t currentCrc = calculateCRC((const char *)msg, i);
             if (crc != currentCrc) {
                 resetData();
-                return RovControlErrorCode::WrongCrc;
             }
-            return RovControlErrorCode::NoError;
         }
 
-        RovControlErrorCode fromRovControlMsgV2(const uint8_t *msg, unsigned long size) {
+        void fromRovControlMsgV2(const uint8_t *msg, unsigned long size) {
             size_t i = 2; // skip header and version
             version = 2;
 
-            read_bytes(msg, i, axisX);
-            read_bytes(msg, i, axisY);
-            read_bytes(msg, i, axisZ);
-            read_bytes(msg, i, axisW);
+            // read_bytes(msg, i, axisX);
+            // read_bytes(msg, i, axisY);
+            // read_bytes(msg, i, axisZ);
+            // read_bytes(msg, i, axisW);
             read_bytes(msg, i, debugFlag);
             read_bytes(msg, i, thrusterPower[0]);
             read_bytes(msg, i, thrusterPower[1]);
@@ -185,9 +210,9 @@ namespace rov {
             read_bytes(msg, i, cameraRotation[0]);
             read_bytes(msg, i, cameraRotation[1]);
             read_bytes(msg, i, manipulatorOpenClose);
-            read_bytes(msg, i, regulators);
-            read_bytes(msg, i, desiredDepth);
-            read_bytes(msg, i, desiredYaw);
+            // read_bytes(msg, i, regulators);
+            // read_bytes(msg, i, desiredDepth);
+            // read_bytes(msg, i, desiredYaw);
             read_bytes(msg, i, cameraIndex);
 
             uint16_t currentCrc = calculateCRC((const char *)msg, i);
@@ -198,19 +223,16 @@ namespace rov {
 
             prvt::swap_endian_for(*this);
 
+
             if (crc != currentCrc) {
                 resetData();
-                return RovControlErrorCode::WrongCrc;
+                char* buf;
+                SerialUSB.println(crc);
+                SerialUSB.println("vs");
+                SerialUSB.println(currentCrc);
+                // return RovControlError(RovControlErrorCode::WrongCrc, buf);
             }
-            return RovControlErrorCode::NoError;
-        }
-
-        static String fromErrorToString(RovControlErrorCode ec) {
-            switch (ec) {
-            case RovControlErrorCode::NoError: return "No error";
-            case RovControlErrorCode::WrongCrc: return "CRC missmatch";
-            case RovControlErrorCode::WrongDataSize: return "Wrong data size";
-            }
+            // return RovControlError(RovControlErrorCode::NoError, nullptr);
         }
 
     };

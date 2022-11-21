@@ -227,3 +227,7 @@ __vm/Upload.vmps.xml
 compile_commands.json
 
 .git*
+
+cbuild
+.codechecker
+.cache

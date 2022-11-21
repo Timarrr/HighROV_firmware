@@ -8,7 +8,7 @@ bool link_up = false;
 void Networking::init() {
 	Ethernet.init(config::networking::cs_pin);
 	if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-	  SerialUSB.println("Ethernet controller was not found. This usually indicates problems with the chip or the PCB");
+	  SerialUSB.println("Ethernet controller was not found. This usually indicates problems with the chip or the PCB. If the next message is \"Ethernet init success\" then you can ignore this message");
 	}
 	else if (Ethernet.hardwareStatus() == EthernetW5100) {
 	  SerialUSB.println("W5100 Ethernet controller detected.");
@@ -31,11 +31,7 @@ void Networking::read_write_udp(rov::RovTelemetry &tel, rov::RovControl &ctrl) {
 	int size = inst().read(buffer, buffer_size);
 
 	if (size > 0) {
-		auto error = ctrl.fromRovControlMsg(buffer, size);
-
-		if (error != rov::RovControl::RovControlErrorCode::NoError) {
-			SerialUSB.println(ctrl.fromErrorToString(error));
-		}
+        ctrl.fromRovControlMsg(buffer, size);
 
 		if (ctrl.version == 2) {
 			size = tel.toRovTelemetryMsgV2(buffer);

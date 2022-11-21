@@ -46,8 +46,6 @@ void Thrusters::update_thrusters(rov::RovControl &ctrl, rov::RovTelemetry & tel)
 		status = ("Thruster HorFrontLeft:	" + (String) ctrl.thrusterPower[0] + "	Thruster HorFrontRight	" + (String) ctrl.thrusterPower[1] +\
 		   "\n" + "Thruster HorBackLeft:	" + (String) ctrl.thrusterPower[2] + "	Thruster HorBackRight	" + (String) ctrl.thrusterPower[3] +\
 		   "\n" + "Thruster VerFront :		" + (String) ctrl.thrusterPower[4] + "	Thruster VerBack		" + (String) ctrl.thrusterPower[5]);
-
-
 	}
 }
 

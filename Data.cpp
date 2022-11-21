@@ -6,10 +6,6 @@ namespace rov {
 } // namespace rov
 
 void rov::prvt::swap_endian_for(RovControl & rc) {
-    rc.axisX = swap_endian(rc.axisX);
-    rc.axisY = swap_endian(rc.axisY);
-    rc.axisZ = swap_endian(rc.axisZ);
-    rc.axisW = swap_endian(rc.axisW);
 
     rc.cameraRotation[0] = swap_endian(rc.cameraRotation[0]);
     rc.cameraRotation[1] = swap_endian(rc.cameraRotation[1]);
@@ -24,12 +20,8 @@ void rov::prvt::swap_endian_for(RovControl & rc) {
     rc.thrusterPower[7] = swap_endian(rc.thrusterPower[7]);
 
     rc.debugFlag = swap_endian(rc.debugFlag);
-
-    rc.desiredDepth = swap_endian(rc.desiredDepth);
     rc.manipulatorOpenClose = swap_endian(rc.manipulatorOpenClose);
     rc.manipulatorRotation = swap_endian(rc.manipulatorRotation);
-    rc.regulators = swap_endian(rc.regulators);
-
     rc.cameraIndex = swap_endian(rc.cameraIndex);
 }
 
