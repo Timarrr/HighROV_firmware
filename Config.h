@@ -95,9 +95,10 @@ namespace config {
 
     namespace debug {
         extern uint8_t debug_mode;
-        constexpr bool standalone = 1;					//turns off most of the external devices, allowing "clean" initialisation without any connections 
-        constexpr bool force_ethernet_init = 0;		    //forcibly turns on the Ethernet controller present on the board. WARNING, the board can hang when initialising Ethernet controller without proper connection to external Ethernet device
-        constexpr bool force_depth_sensor_init = 0;   	//forcibly turns on the depth sensor. for it to work, you need to connect the secondary board with depth sensor present
+        constexpr bool standalone = 1;					//Turns off most of the external devices, allowing "clean" initialisation without any connections 
+        constexpr bool force_ethernet_init = 0;		    //Forcibly turns on the Ethernet controller present on the board. WARNING, the board can hang when initialising Ethernet controller without proper connection to external Ethernet device
+        constexpr bool force_depth_sensor_init = 1;   	//Forcibly turns on the depth sensor. for it to work, you need to connect the secondary board with depth sensor present
+        constexpr int output_interval = 300;
         enum debug_type_bits{
             analog_sensors = 0,
             depth_sensor,

@@ -1,9 +1,8 @@
 #include "Debug.h"
+#include "Config.h"
 using namespace config::debug;
 
 String a;
-
-int output_interval = 300;
 
 long long last_output = 0;
 static const String ayana[] = {
@@ -84,7 +83,7 @@ void Debug::debugHandler(){
 		}
 		if(bitRead(debug_mode, debug_type_bits::depth_sensor)==1)//depth sensor debug
 		{
-			if(!standalone || force_ethernet_init){
+			if(!standalone || force_depth_sensor_init){
 				SerialUSB.println("[depth sensor debug] 		Depth:			" + String(DepthSensor::getDepth()) + "\n");
 			}
 			else {
@@ -154,7 +153,7 @@ void Debug::debugMenu(){
 		}
 		return;
 	}
-	if(debug_curr<=0 || debug_curr>7){
+	if(debug_curr < 0 || debug_curr > 7){
 		SerialUSB.println("wrong input, please resend the input one number at a time");
 	}
 	if (debug_curr == 2 && (standalone && !force_depth_sensor_init)) {
@@ -164,7 +163,7 @@ void Debug::debugMenu(){
 		SerialUSB.println("Ethernet communication is disabled, please change config variables 'bool standalone' and 'bool force_ethernet_init', turning ethernet debug off");
 	}
 
-	if(debug_curr !=2 && debug_curr!=5 && !(debug_curr<=0 || debug_curr>7)) 
+	if(!(debug_curr<=0 || debug_curr>7) && ((debug_curr == 2 && (!standalone || force_depth_sensor_init)) || (debug_curr == 5 && (!standalone || !force_ethernet_init))))
 		bitToggle(debug_mode, debug_curr-1);
 	
 	SerialUSB.print("Exit the debug menu? [y/n]");

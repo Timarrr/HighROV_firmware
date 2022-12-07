@@ -10,6 +10,7 @@
 #include "IMUSensor.h"
 #include "AnalogSensors.h"
 #include "Debug.h"
+#include "USB/USBAPI.h"
 
 rov::RovControl control;
 rov::RovTelemetry Telemetry;
