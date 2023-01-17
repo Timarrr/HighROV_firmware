@@ -43,9 +43,9 @@ void Thrusters::update_thrusters(rov::RovControl &ctrl, rov::RovTelemetry & tel)
 		PWMController::set_thruster(thrusters::vertical_front,         ctrl.thrusterPower[4]);
 		PWMController::set_thruster(thrusters::vertical_back,          ctrl.thrusterPower[5]);
 		
-		status = ("Thruster HorFrontLeft:	" + (String) ctrl.thrusterPower[0] + "	Thruster HorFrontRight	" + (String) ctrl.thrusterPower[1] +\
-		   "\n" + "Thruster HorBackLeft:	" + (String) ctrl.thrusterPower[2] + "	Thruster HorBackRight	" + (String) ctrl.thrusterPower[3] +\
-		   "\n" + "Thruster VerFront :		" + (String) ctrl.thrusterPower[4] + "	Thruster VerBack		" + (String) ctrl.thrusterPower[5]);
+		status = ("Thruster HorFrontLeft:		" + (String) ctrl.thrusterPower[0] + "	Thruster HorFrontRight	" + (String) ctrl.thrusterPower[1] +\
+		   "\n\r"+"Thruster HorBackLeft:		" + (String) ctrl.thrusterPower[2] + "	Thruster HorBackRight	" + (String) ctrl.thrusterPower[3] +\
+		   "\n\r"+"Thruster VerFront :			" + (String) ctrl.thrusterPower[4] + "	Thruster VerBack		" + (String) ctrl.thrusterPower[5]);
 	}
 }
 

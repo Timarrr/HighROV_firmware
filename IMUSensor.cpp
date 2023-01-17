@@ -98,7 +98,7 @@ uint32_t IMUSensor::packetDecode(uint8_t c)
                 // SerialUSB.print(CRCReceived, HEX);
                 // SerialUSB.print(", got: ");
                 // SerialUSB.print(CRCCalculated, HEX);
-                // SerialUSB.print("\n\t");
+                // SerialUSB.print("\n\r\t");
             }
 
             status = kStatus_Idle;

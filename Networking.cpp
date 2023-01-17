@@ -76,12 +76,12 @@ void Networking::write(uint8_t * buffer, int size) {
 String Networking::status() {
 	using namespace config::networking;
 
-	SerialUSB.print("\nTarget IP:        " + String(selfip[0]) + "." + String(selfip[1]) + "." + String(selfip[2]) + "." + String(selfip[3]) + "\n");
+	SerialUSB.print("\n\rTarget IP:        " + String(selfip[0]) + "." + String(selfip[1]) + "." + String(selfip[2]) + "." + String(selfip[3]) + "\n\r");
 	SerialUSB.print("Current IP:         "); SerialUSB.println(Ethernet.localIP());
 	SerialUSB.print("DNS server IP:      "); SerialUSB.println(Ethernet.dnsServerIP());
 	SerialUSB.print("Gateway IP:         "); SerialUSB.println(Ethernet.gatewayIP());
 	SerialUSB.print("Subnet mask:        "); SerialUSB.println(Ethernet.subnetMask());
-	SerialUSB.print("Link status:        "); SerialUSB.println((Ethernet.linkStatus() ? "ON\n" : "OFF\n"));
+	SerialUSB.print("Link status:        "); SerialUSB.println((Ethernet.linkStatus() ? "ON\n\r" : "OFF\n\r"));
 
 }
 
@@ -117,7 +117,7 @@ void Networking::maintain(){
 				{
 					String ip = "0.0.0.0";
 					uint32_t ip_raw = Ethernet.localIP();
-					SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the router and the ROV if it is incorrect\n" + \
+					SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the router and the ROV if it is incorrect\n\r" + \
 										 "If problem persists, check your router and PC's settings");
 				}
 				break;

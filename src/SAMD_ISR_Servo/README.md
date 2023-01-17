@@ -215,7 +215,7 @@ void setup()
 
   delay(200);
 
-  Serial.print(F("\nStarting SAMD_MultipleRandomServos on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\n\rStarting SAMD_MultipleRandomServos on ")); Serial.println(BOARD_NAME);
   Serial.println(SAMD_ISR_SERVO_VERSION);
 
   // SAMD51 always uses TIMER_TC3
@@ -376,7 +376,7 @@ void setup()
 
   delay(200);
 
-  Serial.print(F("\nStarting SAMD_MultipleServos on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\n\rStarting SAMD_MultipleServos on ")); Serial.println(BOARD_NAME);
   Serial.println(SAMD_ISR_SERVO_VERSION);
 
   // SAMD51 always uses TIMER_TC3

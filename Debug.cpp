@@ -6,71 +6,71 @@ String a;
 
 long long last_output = 0;
 static const String ayana[] = {
-"	oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo++oooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo:. +ooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo:..~..ooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooo+:++oooooooooooooooooooooooooo:...+~ .:oooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooo+. .:~~~~~:~::+++++:::~::::::....~o+~.~oooooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooo+..~++:...        .   .      .~.+oo+.~oooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooo:. ~oo+:.~.      ..... ..    ..+oo+..oooooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooo~. +ooo:.. ........... ......:o+o: ~oooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooo~ +oo+:.....~..~...~.~~.~~..:+oo~ :oooooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooooo:.:+~...~~~.~~..~~~~..~~~.. ~++...oooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooo+~~~ .....~.:~~~~~...~... . ...  +ooooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooooooo+~..  . .....~~.~.. ........  ..~ooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooo+~~:.... .....~.....~:+++:~..   ..ooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooo:.:~.~.~.....~~~~~.~+~.~......    +oooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooooooooooooooooooooo...~..~+~~~:~:~~~~~oo+  ~.~....   +oooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooooo+ ......~~.~~:~~~:~:++++.~~~...    .oooooooooooooooooooo\n",
-"	oooooooooooooooooooooooooooooooooooooooooooo~  ...~:+. ~+++++++.   ..~~.. .     +ooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooo+:..  ...+o+++ooooooo+:::+~~~. ..     :ooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooooo:...   ..~++++o+ooo+o+++++~~~. .   .   ooooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooooo+~.....~. ..+ooooo+oooo+o+++~~. .    .  ::oooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooooo++++++++oo+:..~++ooo+++ooooo+:~..     ... o:+ooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooooooo+:++oo+oooo++o+.~::++++oo++:~~:..   . . ..:.+o~ooooooooooooooooo\n\
-	oooooooooooooooooooooooooooooooo++.~:oo+o+++++++++:~..           .~~. ........:+~o+:oooooooooooooooo\n\
-	ooooooooooooooooooooooooooo+++:..~:+ooo+++++++++++~. .   ~+~.~::: ~+:::~.  ...~o:+o~:ooooooooooooooo\n\
-	ooooooooooooooooooooooo+::.....:++oooo++++++ooo+o+~~.. .~++++++~  ++ooo+. .....+++oo :oooooooooooooo\n\
-	ooooooooooooooooooo+:.     . .+oooo++++:++o++oo+:. ..~:.:++:~....:o:+++o+... ..:o:oo+ :ooooooooooooo\n\
-	ooooooooooooooo+:.  .~:+~..:++ooooooo++++o++::~.~.~:+~.~~~:..~...~++++++o+.. . .++:oo+ ~oooooooooooo\n\
-	oooooooooooo+:  .:++oo+~:+oo+++oo++o+o++::...~++o+~++:~:~~~~~:~.:+++o++oo+~. ~: ~o~+oo+ .+oooooooooo\n\
-	o+oooooooo+:  .+oooo+~~ooo++++++o+++++~ . .:+oooo+:+:~::++++:.~+o++++++o++....o+.~+.ooo+::+ooooooooo\n\
-	o++oooooo+.  ~+oooo+.+o+::::~~~:~~:+o~ .~~o+o++o++:::+~:+:~~.~ooo++:+o++++: . +oo:~ :ooo+o+++ooooooo\n\
-	oo+:+ooo+. .~+oo++:..~.~~~..     .~:++.+:o+++++o+++:++::~...~oo+oo++++++++~ . ~oooo..+ooooo+++++oooo\n\
-	oooo+~::...:~+~.       .~.  .....    ~:o++++++++++:+++++....+ooo++:+o+++o:  .. +ooo~ :::+ooooo+~~++o\n\
-	oooooo+~..+:~    ..          ...      .~~:+++++++++++++::. ~++++++:++oo++ ..  ..:oo: :++~.~++o::o+.~\n",
-"	ooooooo+~~o:~ .......     ...~...        ~:::+++++++++:+:  .+++++:+++++++~....~. .+~ ~ooo+~ .~.+oo+.\n\
-	oooooooo++o:. .........   ..~....     ..  .++++++++++++++. ~~++::+o+o++++:~...o+......:++++.  +oooo+\n\
-	oooooooo++: ..  .... ...  .... ..      .. ..:+++++++++++++::+:+::+o++ooo+::~. ~oo:.... .:+++~.+ooooo\n\
-	oooooooo+. .   .......   ..~~....      ......~++++++++++++++++:+++o++o+o+:::.  +oo~ .....~:o+:oooooo\n\
-	ooooooo+  .  .:  ... ... .....~.         . .. .:+++oo+++++:::::oo+oooo++:::::~ .+o. ...~.  ..+oooooo\n\
-	oooooo+~ . .+oo~ ....... ......       . ..~...  ~ooo+o++++.~+:+oo++++:~~~~::~+. .:   +: ~. . .~+oooo\n\
-	oooooo+~  ~oooo+ ......  .......        ........ .++o+o+++~.::+oo+~:~:~.~:~~~:+. .   oo+... . +~:+oo\n\
-	ooooooo. :oooooo: .. ..  ~.~... .       ........~  ~++++o+~ :+:oo+::~:~~~:~~~~+:   .:~+o+~. . :o++++\n\
-	oooo+oo::ooooooo+   .    ..... .         ... . ...  .+++++~ ~+++oo:~~~~.+~~~~.:+ ...~.~~:~.....ooooo\n\
-	ooo+:ooooooooo+..~  ..   .....          .......~...   :+o++:++++oo:~~~~ +~~~~~:~   .. ::::~~.. +oooo\n\
-	oooo+:++++++~~~++o+      ...              ...~.... .  ~.+oo++++:oo+~~~..+~.~~. .. ...  ~:+~:.. +oooo\n\
-	oooooo++++++ooooooo.    ....              . ..... ..  .~ :+o++:+oo+~~~..o.~~...~... .. ~:.~:~. ooooo\n\
-	oooooooooooooooooooo.    .                  .......    ~. .+o+++ooo..~ :o.....::~...~. ~o+~~~ :ooooo\n\
-	oooooooooooooooooooo+                      ....... .  .~.~ .+++++oo~...o+ .~.:o+:~.~~   o++~..oooooo\n\
-	ooooooooooooooooooooo~                       ...  ... ~~~.  ~o++ooo~..:o~...~+o+:~~~.   o++:. oooooo\n\
-	ooooooooooooooooooooo+                            .   .~. .  :+ooo+...o:.. ~+o+:++:~~  :o:+: ~+ooooo\n",
-"	ooooooooooooooooooooo:                                 ...~ .+oooo+..+:~~.~oo++++::+~  ++++::~+ooooo\n\
-	oooooooooooooooooooo+                                  :~..:oooooo~.+~+:~+oooooooo.~  +oooo++:+ooooo\n\
-	ooooooooooooooooooo~.         ..                       .. .oooooo+~oo+oooooooooo+.   +oooooooooooooo\n\
-	oooooooooooooooooo~             :~::++:~::~.  ..      .~   .oooo+:oooooooooooo+~    +ooooooooooooooo\n\
-	ooooooooooooooooo~              ~oooooooooo++++++++:++oo.   .+oooooooooooooo+~    ~ooooooooooooooooo\n\
-	oooooooooooooooo:     ~          +ooooooooooooooooooooooo.    ~+ooooooo++~..    ~+oooooooooooooooooo\n\
-	ooooooooooooooo+ .   ..          .oooooooooooooooooooooooo+.     ....        ~+ooooooooooooooooooooo\n\
-	oooooooooooooo+. .                +ooooooooooooooooooooooooo+~.         .~:+oooooooooooooooooooooooo\n\
-	oooooooooooo+~ ... .   . .        ooooooooooooooooooooooooooooo++++++++ooooooooooooooooooooooooooooo\n\
-	ooooooooooo+..... .   ~o+        ~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooo~ .... ..  +oo.   ..   oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooo+~       ~+ooo. ..     +ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooooo+::::++ooooo~. .     ~ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooo~ ..     ~ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooo+.      ~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\
-	ooooooooooooooooooooooooooo+~.~~+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n"
+"	oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo++oooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo:. +ooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo:..~..ooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooo+:++oooooooooooooooooooooooooo:...+~ .:oooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooo+. .:~~~~~:~::+++++:::~::::::....~o+~.~oooooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooo+..~++:...        .   .      .~.+oo+.~oooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooo:. ~oo+:.~.      ..... ..    ..+oo+..oooooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooo~. +ooo:.. ........... ......:o+o: ~oooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooo~ +oo+:.....~..~...~.~~.~~..:+oo~ :oooooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooooo:.:+~...~~~.~~..~~~~..~~~.. ~++...oooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooo+~~~ .....~.:~~~~~...~... . ...  +ooooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooooooo+~..  . .....~~.~.. ........  ..~ooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooo+~~:.... .....~.....~:+++:~..   ..ooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooo:.:~.~.~.....~~~~~.~+~.~......    +oooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooooooooooooooooooooo...~..~+~~~:~:~~~~~oo+  ~.~....   +oooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooooo+ ......~~.~~:~~~:~:++++.~~~...    .oooooooooooooooooooo\n\r",
+"	oooooooooooooooooooooooooooooooooooooooooooo~  ...~:+. ~+++++++.   ..~~.. .     +ooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooo+:..  ...+o+++ooooooo+:::+~~~. ..     :ooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooooo:...   ..~++++o+ooo+o+++++~~~. .   .   ooooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooooo+~.....~. ..+ooooo+oooo+o+++~~. .    .  ::oooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooooo++++++++oo+:..~++ooo+++ooooo+:~..     ... o:+ooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooooooo+:++oo+oooo++o+.~::++++oo++:~~:..   . . ..:.+o~ooooooooooooooooo\n\r\
+	oooooooooooooooooooooooooooooooo++.~:oo+o+++++++++:~..           .~~. ........:+~o+:oooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooo+++:..~:+ooo+++++++++++~. .   ~+~.~::: ~+:::~.  ...~o:+o~:ooooooooooooooo\n\r\
+	ooooooooooooooooooooooo+::.....:++oooo++++++ooo+o+~~.. .~++++++~  ++ooo+. .....+++oo :oooooooooooooo\n\r\
+	ooooooooooooooooooo+:.     . .+oooo++++:++o++oo+:. ..~:.:++:~....:o:+++o+... ..:o:oo+ :ooooooooooooo\n\r\
+	ooooooooooooooo+:.  .~:+~..:++ooooooo++++o++::~.~.~:+~.~~~:..~...~++++++o+.. . .++:oo+ ~oooooooooooo\n\r\
+	oooooooooooo+:  .:++oo+~:+oo+++oo++o+o++::...~++o+~++:~:~~~~~:~.:+++o++oo+~. ~: ~o~+oo+ .+oooooooooo\n\r\
+	o+oooooooo+:  .+oooo+~~ooo++++++o+++++~ . .:+oooo+:+:~::++++:.~+o++++++o++....o+.~+.ooo+::+ooooooooo\n\r\
+	o++oooooo+.  ~+oooo+.+o+::::~~~:~~:+o~ .~~o+o++o++:::+~:+:~~.~ooo++:+o++++: . +oo:~ :ooo+o+++ooooooo\n\r\
+	oo+:+ooo+. .~+oo++:..~.~~~..     .~:++.+:o+++++o+++:++::~...~oo+oo++++++++~ . ~oooo..+ooooo+++++oooo\n\r\
+	oooo+~::...:~+~.       .~.  .....    ~:o++++++++++:+++++....+ooo++:+o+++o:  .. +ooo~ :::+ooooo+~~++o\n\r\
+	oooooo+~..+:~    ..          ...      .~~:+++++++++++++::. ~++++++:++oo++ ..  ..:oo: :++~.~++o::o+.~\n\r",
+"	ooooooo+~~o:~ .......     ...~...        ~:::+++++++++:+:  .+++++:+++++++~....~. .+~ ~ooo+~ .~.+oo+.\n\r\
+	oooooooo++o:. .........   ..~....     ..  .++++++++++++++. ~~++::+o+o++++:~...o+......:++++.  +oooo+\n\r\
+	oooooooo++: ..  .... ...  .... ..      .. ..:+++++++++++++::+:+::+o++ooo+::~. ~oo:.... .:+++~.+ooooo\n\r\
+	oooooooo+. .   .......   ..~~....      ......~++++++++++++++++:+++o++o+o+:::.  +oo~ .....~:o+:oooooo\n\r\
+	ooooooo+  .  .:  ... ... .....~.         . .. .:+++oo+++++:::::oo+oooo++:::::~ .+o. ...~.  ..+oooooo\n\r\
+	oooooo+~ . .+oo~ ....... ......       . ..~...  ~ooo+o++++.~+:+oo++++:~~~~::~+. .:   +: ~. . .~+oooo\n\r\
+	oooooo+~  ~oooo+ ......  .......        ........ .++o+o+++~.::+oo+~:~:~.~:~~~:+. .   oo+... . +~:+oo\n\r\
+	ooooooo. :oooooo: .. ..  ~.~... .       ........~  ~++++o+~ :+:oo+::~:~~~:~~~~+:   .:~+o+~. . :o++++\n\r\
+	oooo+oo::ooooooo+   .    ..... .         ... . ...  .+++++~ ~+++oo:~~~~.+~~~~.:+ ...~.~~:~.....ooooo\n\r\
+	ooo+:ooooooooo+..~  ..   .....          .......~...   :+o++:++++oo:~~~~ +~~~~~:~   .. ::::~~.. +oooo\n\r\
+	oooo+:++++++~~~++o+      ...              ...~.... .  ~.+oo++++:oo+~~~..+~.~~. .. ...  ~:+~:.. +oooo\n\r\
+	oooooo++++++ooooooo.    ....              . ..... ..  .~ :+o++:+oo+~~~..o.~~...~... .. ~:.~:~. ooooo\n\r\
+	oooooooooooooooooooo.    .                  .......    ~. .+o+++ooo..~ :o.....::~...~. ~o+~~~ :ooooo\n\r\
+	oooooooooooooooooooo+                      ....... .  .~.~ .+++++oo~...o+ .~.:o+:~.~~   o++~..oooooo\n\r\
+	ooooooooooooooooooooo~                       ...  ... ~~~.  ~o++ooo~..:o~...~+o+:~~~.   o++:. oooooo\n\r\
+	ooooooooooooooooooooo+                            .   .~. .  :+ooo+...o:.. ~+o+:++:~~  :o:+: ~+ooooo\n\r",
+"	ooooooooooooooooooooo:                                 ...~ .+oooo+..+:~~.~oo++++::+~  ++++::~+ooooo\n\r\
+	oooooooooooooooooooo+                                  :~..:oooooo~.+~+:~+oooooooo.~  +oooo++:+ooooo\n\r\
+	ooooooooooooooooooo~.         ..                       .. .oooooo+~oo+oooooooooo+.   +oooooooooooooo\n\r\
+	oooooooooooooooooo~             :~::++:~::~.  ..      .~   .oooo+:oooooooooooo+~    +ooooooooooooooo\n\r\
+	ooooooooooooooooo~              ~oooooooooo++++++++:++oo.   .+oooooooooooooo+~    ~ooooooooooooooooo\n\r\
+	oooooooooooooooo:     ~          +ooooooooooooooooooooooo.    ~+ooooooo++~..    ~+oooooooooooooooooo\n\r\
+	ooooooooooooooo+ .   ..          .oooooooooooooooooooooooo+.     ....        ~+ooooooooooooooooooooo\n\r\
+	oooooooooooooo+. .                +ooooooooooooooooooooooooo+~.         .~:+oooooooooooooooooooooooo\n\r\
+	oooooooooooo+~ ... .   . .        ooooooooooooooooooooooooooooo++++++++ooooooooooooooooooooooooooooo\n\r\
+	ooooooooooo+..... .   ~o+        ~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooo~ .... ..  +oo.   ..   oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooo+~       ~+ooo. ..     +ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooooo+::::++ooooo~. .     ~ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooo~ ..     ~ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooo+.      ~oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r\
+	ooooooooooooooooooooooooooo+~.~~+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r"
 };
 int i = 0;
 void Debug::debugHandler(){
@@ -78,16 +78,16 @@ void Debug::debugHandler(){
 	if (millis() > output_interval + last_output) {
 		if(bitRead(debug_mode, debug_type_bits::analog_sensors)==1)//analog sensors debug
 		{
-			SerialUSB.println("[analog sensors debug]		Amperage:		" + String(AnalogSensors::getAmperage()) + "\n"\
+			SerialUSB.println("[analog sensors debug]		Amperage:		" + String(AnalogSensors::getAmperage()) + "\n\r"\
 								"							Voltage: 		" + String(AnalogSensors::getVoltage()));
 		}
 		if(bitRead(debug_mode, debug_type_bits::depth_sensor)==1)//depth sensor debug
 		{
 			if(!standalone || force_depth_sensor_init){
-				SerialUSB.println("[depth sensor debug] 		Depth:			" + String(DepthSensor::getDepth()) + "\n");
+				SerialUSB.println("[depth sensor debug] 		Depth:			" + String(DepthSensor::getDepth()) + "\n\r");
 			}
 			else {
-				SerialUSB.println("Depth sensor support disabled, turning off debug mode 0b00000010");
+				SerialUSB.println("Depth sensor support disabled, turning off debug mode 0b00000010\n");
 				bitClear(debug_mode, debug_type_bits::depth_sensor);
 			}
 		}
@@ -98,7 +98,7 @@ void Debug::debugHandler(){
 		if(bitRead(debug_mode, debug_type_bits::manipulator)==1)//Manipulator debug
 		{
 			SerialUSB.println("[Manipulator debug] 		Position:		" + String(HighROV::manip_pos));
-			// SerialUSB.println("[Manipulator debug] 			Position:		" + String(control.manipulatorOpenClose) + "\n"\ //code for official manipulator
+			// SerialUSB.println("[Manipulator debug] 			Position:		" + String(control.manipulatorOpenClose) + "\n\r"\ //code for official manipulator
 			// 					"								Rotation:		" + String(control.manipulatorRotation));
 		}
 		if(bitRead(debug_mode, debug_type_bits::networking)==1)//Networking debug
@@ -126,16 +126,16 @@ void Debug::debugHandler(){
 }
 
 void Debug::debugMenu(){
-	SerialUSB.print("Debug menu:\n"\
-					"1 - analog sensors\n"\
-					"2 - depth sensor\n"\
-					"3 - IMU\n"\
-					"4 - manipulator\n"\
-					"5 - networking\n"\
-					"6 - thrusters\n"\
-					"7 - reset\n"\
-					"8 - neko\n"\
-					"0 - exit\n"\
+	SerialUSB.print("Debug menu:\n\r"\
+					"1 - analog sensors\n\r"\
+					"2 - depth sensor\n\r"\
+					"3 - IMU\n\r"\
+					"4 - manipulator\n\r"\
+					"5 - networking\n\r"\
+					"6 - thrusters\n\r"\
+					"7 - reset\n\r"\
+					"8 - neko\n\r"\
+					"0 - exit\n\r"\
 					"Currently flags are: 0x");
 	SerialUSB.println(debug_mode, BIN);
 	SerialUSB.print("Your choice: ");
@@ -147,7 +147,7 @@ void Debug::debugMenu(){
 	int debug_curr = msg.toInt();
 
 	if(debug_curr==8){
-		SerialUSB.println("Hi, I'm your ROV's neko girl, Ayana, and I am responsible for debugging all of this, nya!\n");
+		SerialUSB.println("Hi, I'm your ROV's neko girl, Ayana, and I am responsible for debugging all of this, nya!\n\r");
 		for(int i = 0; i<4; i++){
 			SerialUSB.print(ayana[i]);
 		}
