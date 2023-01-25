@@ -74,6 +74,16 @@ void Networking::write(uint8_t * buffer, int size) {
 	Udp.endPacket();
 }
 
+String Networking::ip_decoder(uint32_t addr){
+    byte ip_buf[4]; // 111.222.333.444
+	for(int i = 3; i >= 0; i--){ //byte segment
+		for(int j = 7; j >=0; j--){ //bit
+			ip_buf[i] += bitRead(addr, i*8+j) * pow(2,j); //bit read order - LSB first -> reading MSB first
+		}
+	}
+    return String(ip_buf[0]) + "." + String(ip_buf[1]) + "." + String(ip_buf[2]) + "." + String(ip_buf[3]) + "." ;
+}
+
 String Networking::status() {
 	using namespace config::networking;
 

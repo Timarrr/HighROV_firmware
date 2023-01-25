@@ -9,20 +9,12 @@ namespace config {
     /* pinout */
     namespace pwm {
         /* thrusters */
-//        constexpr int th_horizontal_front_left_pin  = 2;
-//        constexpr int th_horizontal_front_right_pin = 3;
-//        constexpr int th_horizontal_back_left_pin   = 4;
-//        constexpr int th_horizontal_back_right_pin  = 5;
-//        constexpr int th_vertical_front_pin         = 6;
-//        constexpr int th_vertical_back_pin          = 7;
-
-        constexpr int th_horizontal_front_left_pin  = 6; //6
-        constexpr int th_horizontal_front_right_pin = 7; //7
-        constexpr int th_horizontal_back_left_pin   = 2; //2
-        constexpr int th_horizontal_back_right_pin  = 5; //5
-        constexpr int th_vertical_front_pin         = 4; //4
-        constexpr int th_vertical_back_pin          = 3; //3
-
+        constexpr int th_horizontal_front_left_pin  = 2;
+        constexpr int th_horizontal_front_right_pin = 3;
+        constexpr int th_horizontal_back_left_pin   = 4;
+        constexpr int th_horizontal_back_right_pin  = 5;
+        constexpr int th_vertical_front_pin         = 6;
+        constexpr int th_vertical_back_pin          = 7;
         /* additional custom thrusters */
         constexpr int th_custom_0_pin   = 8;
         constexpr int th_custom_1_pin   = 9;
@@ -39,17 +31,11 @@ namespace config {
         constexpr int pwm_custom_a3_pin = A3;
 
         /* manipulator PCA9536 channels */
-//        constexpr int manip_grab_ch     = 1;
-//        constexpr int manip_release_ch   = 0;
-//
-//        constexpr int manip_left_ch     = 2;
-//        constexpr int manip_right_ch    = 3;
+        constexpr int manip_grab_ch     = 0;
+        constexpr int manip_release_ch   = 1;
 
-        constexpr int manip_grab_ch     = 2;
-        constexpr int manip_release_ch   = 3;
-
-        constexpr int manip_left_ch     = 0;
-        constexpr int manip_right_ch    = 1;
+        constexpr int manip_left_ch     = 2;
+        constexpr int manip_right_ch    = 3;
     }
 
     /* indices of thrusters (controlled by SAMD_ISR_SERVO) */

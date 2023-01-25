@@ -1,1 +1,2 @@
-# Прошивка для аппаратов Tercel и Tidehunter, участвующих в соревнованиях MATE, на основе прошивки HighROV
+# HighROV-firmware
+Modified firmware for Tercel and Tidehunter ROVs used by CfRD team in 2022 and 2023 MATE ROV Competition 
