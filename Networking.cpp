@@ -19,7 +19,8 @@ void Networking::init() {
 	else if (Ethernet.hardwareStatus() == EthernetW5500) {
 	  SerialUSB.println("W5500 Ethernet controller detected.");
 	}
-	SerialUSB.println(Ethernet.begin(inst().mac)==1 ? "Ethernet init success" : "Ethernet init failed");
+	SerialUSB.print("Ethernet init... ");
+	SerialUSB.println(Ethernet.begin(inst().mac)==1 ? "Success!" : "Failed!");
 	inst().Udp.begin(inst().m_self_port);
 }
 
