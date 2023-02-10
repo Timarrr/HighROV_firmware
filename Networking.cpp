@@ -74,21 +74,12 @@ void Networking::write(uint8_t * buffer, int size) {
 	Udp.endPacket();
 }
 
-String Networking::ip_decoder(uint32_t addr){
-    byte ip_buf[4]; // 111.222.333.444
-	for(int i = 3; i >= 0; i--){ //byte segment
-		for(int j = 7; j >=0; j--){ //bit
-			ip_buf[i] += bitRead(addr, i*8+j) * pow(2,j); //bit read order - LSB first -> reading MSB first
-		}
-	}
-    return String(ip_buf[0]) + "." + String(ip_buf[1]) + "." + String(ip_buf[2]) + "." + String(ip_buf[3]) + "." ;
-}
-
 String Networking::status() {
 	using namespace config::networking;
 
-	SerialUSB.print("\n\rTarget IP:        " + String(selfip[0]) + "." + String(selfip[1]) + "." + String(selfip[2]) + "." + String(selfip[3]) + "\n\r");
-	SerialUSB.print("Current IP:         "); SerialUSB.println(Ethernet.localIP());
+	SerialUSB.print("\n\r"
+					"Target self IP:     " + String(selfip[0]) + "." + String(selfip[1]) + "." + String(selfip[2]) + "." + String(selfip[3]) + "\n\r");
+	SerialUSB.print("Current self IP:    "); SerialUSB.println(Ethernet.localIP());
 	SerialUSB.print("DNS server IP:      "); SerialUSB.println(Ethernet.dnsServerIP());
 	SerialUSB.print("Gateway IP:         "); SerialUSB.println(Ethernet.gatewayIP());
 	SerialUSB.print("Subnet mask:        "); SerialUSB.println(Ethernet.subnetMask());
@@ -126,8 +117,7 @@ void Networking::maintain(){
 				}
 				else
 				{
-					String ip = "0.0.0.0";
-					uint32_t ip_raw = Ethernet.localIP();
+					String ip = (String) Ethernet.localIP();
 					SerialUSB.println("Binding to DHCP address " + ip + " after downtime, check the IP and reboot the router and the ROV if it is incorrect\n\r" + \
 										 "If problem persists, check your router and PC's settings");
 				}

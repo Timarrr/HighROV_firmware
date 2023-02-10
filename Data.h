@@ -1,18 +1,11 @@
 // RovDataTypes.h
-
-#ifndef _ROVDATATYPES_h
-#define _ROVDATATYPES_h
-
-#include "USB/USBAPI.h"
+#pragma once
 #include <cstddef>
 #include <cstring>
-#if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
 #include <stdint.h>
 #include "Crc.h"
+#include "USB/USBAPI.h"
 
 
 namespace rov {
@@ -191,10 +184,6 @@ namespace rov {
             size_t i = 2; // skip header and version
             version = 2;
 
-            // read_bytes(msg, i, axisX);
-            // read_bytes(msg, i, axisY);
-            // read_bytes(msg, i, axisZ);
-            // read_bytes(msg, i, axisW);
             read_bytes(msg, i, debugFlag);
             read_bytes(msg, i, thrusterPower[0]);
             read_bytes(msg, i, thrusterPower[1]);
@@ -210,9 +199,6 @@ namespace rov {
             read_bytes(msg, i, cameraRotation[0]);
             read_bytes(msg, i, cameraRotation[1]);
             read_bytes(msg, i, manipulatorOpenClose);
-            // read_bytes(msg, i, regulators);
-            // read_bytes(msg, i, desiredDepth);
-            // read_bytes(msg, i, desiredYaw);
             read_bytes(msg, i, cameraIndex);
 
             uint16_t currentCrc = calculateCRC((const char *)msg, i);
@@ -227,9 +213,7 @@ namespace rov {
             if (crc != currentCrc) {
                 resetData();
                 char* buf;
-                SerialUSB.println(crc);
-                SerialUSB.println("vs");
-                SerialUSB.println(currentCrc);
+                SerialUSB.println("CRC mismatch: " + (String) crc + "vs" + (String) currentCrc);
                 // return RovControlError(RovControlErrorCode::WrongCrc, buf);
             }
             // return RovControlError(RovControlErrorCode::NoError, nullptr);
@@ -327,4 +311,3 @@ namespace rov {
     };
 
 }
-#endif

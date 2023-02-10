@@ -3,8 +3,6 @@
 #include "variant.h"
 
 #define ISERIAL_MAX_LEN         1024
-#ifndef CONFIG_H
-#define CONFIG_H
 namespace config {
     /* pinout */
     namespace pwm {
@@ -45,8 +43,10 @@ namespace config {
             horizontal_front_right,
             horizontal_back_left,
             horizontal_back_right,
-            vertical_front,
-            vertical_back,
+            vertical_front_left,
+            vertical_front_right,
+            vertical_back_left,
+            vertical_back_right,
             custom_0,
             custom_1,
         };
@@ -96,4 +96,3 @@ namespace config {
         };
     }
 }
-#endif

@@ -18,7 +18,7 @@ private:
     static Networking &inst();
     int read(uint8_t *buffer, int size);
     void write(uint8_t *buffer, int size);
-
+    String ip_decoder(uint32_t addr);
 
     byte mac[6] = {
         0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED

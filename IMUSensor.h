@@ -1,7 +1,5 @@
 // IMUSensor.h
-
-#ifndef _IMUSENSOR_h
-#define _IMUSENSOR_h
+#pragma once
 
 #include "Arduino.h"
 
@@ -73,6 +71,3 @@ public:
     static float getYaw();
     void update_int();
 };
-
-
-#endif

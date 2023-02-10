@@ -17,8 +17,8 @@ void PWMController::init() {
     pwm.m_pins[thrusters::horizontal_front_right] = th_horizontal_front_right_pin;
     pwm.m_pins[thrusters::horizontal_back_left]   = th_horizontal_back_left_pin;
     pwm.m_pins[thrusters::horizontal_back_right]  = th_horizontal_back_right_pin;
-    pwm.m_pins[thrusters::vertical_front]         = th_vertical_front_pin;
-    pwm.m_pins[thrusters::vertical_back]          = th_vertical_back_pin;
+    pwm.m_pins[thrusters::vertical_front_left]         = th_vertical_front_pin;
+    pwm.m_pins[thrusters::vertical_back_left]          = th_vertical_back_pin;
     pwm.m_pins[thrusters::custom_0]               = th_custom_0_pin;
     pwm.m_pins[thrusters::custom_1]               = th_custom_1_pin;
 
