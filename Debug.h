@@ -9,6 +9,6 @@
 #pragma once
 class Debug {
 	public:
-		static void debugHandler();
+		static void debugHandler(rov::RovControl control);
 		static void debugMenu();
 };

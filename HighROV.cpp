@@ -15,14 +15,8 @@
 rov::RovControl control;
 rov::RovTelemetry Telemetry;
 
-uint8_t config::debug::debug_mode = 0b00000000;
-
-int manip_speed = 200;//percent
-float HighROV::manip_pos = -100;//default position
-
 bool wait_for_serial = 1; // change to 1 to enable waiting for serial connection for <wait_for_serial_time> milliseconds
 int wait_for_serial_time = 15000; //milliseconds
-
 
 void setup() {
     Wire.begin();
@@ -131,17 +125,13 @@ void HighROV::run() {
 		RotaryCameras::set_angle(config::servos::back,  constrain(control.cameraRotation[1], -1, 1) * 3.0);
 		RotaryCameras::select_cam(control.cameraIndex == 1 ? true : false);
 
-
-
-		manip_pos += (float)control.manipulatorOpenClose*(float)manip_speed/100;
-		manip_pos = constrain(manip_pos, -100,100);
-		PWMController::set_thruster(7, manip_pos);
+		Manipulator::set_power(control.manipulatorRotation, control.manipulatorOpenClose);
 
 		if (DepthSensor::getUpdateStatus() == true) {
 			analogWrite(LED_BUILTIN, sin(millis() * 0.01) * 127 + 127);
 		} else {
 			analogWrite(LED_BUILTIN, 255);
 		}
-        Debug::debugHandler();
+        Debug::debugHandler(control);
 }
 

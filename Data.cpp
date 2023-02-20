@@ -19,7 +19,7 @@ void rov::prvt::swap_endian_for(RovControl & rc) {
     rc.thrusterPower[6] = swap_endian(rc.thrusterPower[6]);
     rc.thrusterPower[7] = swap_endian(rc.thrusterPower[7]);
 
-    rc.debugFlag = swap_endian(rc.debugFlag);
+    rc.auxFlags = swap_endian(rc.auxFlags);
     rc.manipulatorOpenClose = swap_endian(rc.manipulatorOpenClose);
     rc.manipulatorRotation = swap_endian(rc.manipulatorRotation);
     rc.cameraIndex = swap_endian(rc.cameraIndex);
@@ -33,9 +33,9 @@ void rov::prvt::swap_endian_for(RovTelemetry & rt) {
     rt.ammeter = swap_endian(rt.ammeter);
     rt.voltmeter = swap_endian(rt.voltmeter);
 
-    rt.manipulatorAngle = swap_endian(rt.manipulatorAngle);
-    rt.manipulatorState = swap_endian(rt.manipulatorState);
-    rt.regulatorsFeedback = swap_endian(rt.regulatorsFeedback);
+    // rt.manipulatorAngle = swap_endian(rt.manipulatorAngle);
+    // rt.manipulatorState = swap_endian(rt.manipulatorState);
+    // rt.regulatorsFeedback = swap_endian(rt.regulatorsFeedback);
     rt.depth = swap_endian(rt.depth);
 
     rt.cameraIndex = swap_endian(rt.cameraIndex);

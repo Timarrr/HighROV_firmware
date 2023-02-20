@@ -4,8 +4,6 @@
 
 namespace HighROV
 {
-    
-    extern float manip_pos;
     void init();
     void run();
 };

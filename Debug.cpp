@@ -1,8 +1,11 @@
 #include "Debug.h"
 #include "Config.h"
+#include "Data.h"
+#include "api/Common.h"
 using namespace config::debug;
 
 String a;
+
 
 long long last_output = 0;
 static const String ayana[] = {
@@ -73,35 +76,34 @@ static const String ayana[] = {
 	ooooooooooooooooooooooooooo+~.~~+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo\n\r"
 };
 int i = 0;
-void Debug::debugHandler(){
+void Debug::debugHandler(rov::RovControl control){
 	using namespace config::debug;
-	if (millis() > output_interval + last_output) {
-		if(bitRead(debug_mode, debug_type_bits::analog_sensors)==1)//analog sensors debug
+	if (millis() > (output_interval + last_output)) {
+		if(BIT_CHECK(debug_mode, debug_type_bits::analog_sensors)==1)//analog sensors debug
 		{
 			SerialUSB.println("[analog sensors debug]		Amperage:		" + String(AnalogSensors::getAmperage()) + "\n\r"\
 								"							Voltage: 		" + String(AnalogSensors::getVoltage()));
 		}
-		if(bitRead(debug_mode, debug_type_bits::depth_sensor)==1)//depth sensor debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::depth_sensor)==1)//depth sensor debug
 		{
 			if(!standalone || force_depth_sensor_init){
 				SerialUSB.println("[depth sensor debug] 		Depth:			" + String(DepthSensor::getDepth()) + "\n\r");
 			}
 			else {
 				SerialUSB.println("Depth sensor support disabled, turning off debug mode 0b00000010\n");
-				bitClear(debug_mode, debug_type_bits::depth_sensor);
+				BIT_CLEAR(debug_mode, debug_type_bits::depth_sensor);
 			}
 		}
-		if(bitRead(debug_mode, debug_type_bits::imu)==1)//IMU debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::imu)==1)//IMU debug
 		{
 			SerialUSB.println("[IMU debug] 				Yaw/Roll/Pitch:	" + String(IMUSensor::getYaw(), 2) + "/" + String(IMUSensor::getRoll(),2) + "/" + String(IMUSensor::getPitch()));
 		}
-		if(bitRead(debug_mode, debug_type_bits::manipulator)==1)//Manipulator debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::manipulator)==1)//Manipulator debug
 		{
-			SerialUSB.println("[Manipulator debug] 		Position:		" + String(HighROV::manip_pos));
-			// SerialUSB.println("[Manipulator debug] 			Position:		" + String(control.manipulatorOpenClose) + "\n\r"\ //code for official manipulator
-			// 					"								Rotation:		" + String(control.manipulatorRotation));
+			SerialUSB.println("[Manipulator debug] 			Position:		" + String(control.manipulatorOpenClose) + "\n\r" //code for official manipulator
+							  "								Rotation:		" + String(control.manipulatorRotation));
 		}
-		if(bitRead(debug_mode, debug_type_bits::networking)==1)//Networking debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::networking)==1)//Networking debug
 		{
 			if(!standalone || force_ethernet_init){
 				SerialUSB.println("[Networking debug]");
@@ -109,17 +111,17 @@ void Debug::debugHandler(){
 			}
 			else {
 				SerialUSB.println("Ethernet support disabled, turning off debug mode 0b00001000");
-				bitClear(debug_mode, debug_type_bits::networking);
+				BIT_CLEAR(debug_mode, debug_type_bits::networking);
 			}
 		}
-		if(bitRead(debug_mode, debug_type_bits::thrusters)==1)//Thrusters debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::thrusters)==1)//Thrusters debug
 		{
 			SerialUSB.println("[Thrusters debug]"); 
 			SerialUSB.println(Thrusters::status);
 		}
-		if(bitRead(debug_mode, debug_type_bits::reset)==1)//Reset debug
+		if(BIT_CHECK(debug_mode, debug_type_bits::reset)==1)//Reset debug
 		{
-			debug_mode = 0b00000000;
+			// debug_mode = 0b00000000;
 		}
 		last_output = millis();
 	}
@@ -164,7 +166,7 @@ void Debug::debugMenu(){
 	}
 
 	if(!(debug_curr<=0 || debug_curr>7) && ((debug_curr == 2 && (!standalone || force_depth_sensor_init)) || (debug_curr == 5 && (!standalone || !force_ethernet_init))))
-		bitToggle(debug_mode, debug_curr-1);
+		BIT_FLIP(debug_mode, debug_curr-1);
 	
 	SerialUSB.print("Exit the debug menu? [y/n]");
 

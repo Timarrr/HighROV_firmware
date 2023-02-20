@@ -20,7 +20,7 @@ void Networking::init() {
 	  SerialUSB.println("W5500 Ethernet controller detected.");
 	}
 	SerialUSB.print("Ethernet init... ");
-	SerialUSB.println(Ethernet.begin(inst().mac)==1 ? "Success!" : "Failed!");
+	SerialUSB.println(Ethernet.begin(inst().mac, 10000, 5000)==1 ? "Success!" : "Failed!");
 	inst().Udp.begin(inst().m_self_port);
 }
 
@@ -31,25 +31,14 @@ void Networking::read_write_udp(rov::RovTelemetry &tel, rov::RovControl &ctrl) {
 	uint8_t buffer[buffer_size];
 	int size = inst().read(buffer, buffer_size);
 
+
+
+
 	if (size > 0) {
         ctrl.fromRovControlMsg(buffer, size);
-
-		if (ctrl.version == 2) {
-			size = tel.toRovTelemetryMsgV2(buffer);
-		} else {
-			size = tel.toRovTelemetryMsgV1(buffer);
-		}
-
-		inst().write(buffer, size);
-
-		unsigned long curTimestamp = millis();
-		if (abs(curTimestamp - lastTimestamp) > 1000) {
-			lastTimestamp = curTimestamp;
-
-			size = rov::RovHello::toRovHelloMsg(buffer);
-			inst().write(buffer, size);
-		}
 	}
+	size = tel.toRovTelemetryMsgV2(buffer);
+	inst().write(buffer, size);
 }
 
 
@@ -93,10 +82,10 @@ void Networking::maintain(){
 		link_up = true;
 	}
 	else if (Ethernet.linkStatus() == LinkOFF && link_up) {
-		SerialUSB.println("Link status: Off. This usually indicates problems w/cable");
+		SerialUSB.println("Link status: Off. This usually indicates problems with cable");
 		link_up = false;
 	}
-	if ((link_up && (millis() >= last_maintain_time + 500)) || millis() >= last_maintain_time + 5000){//if link is up -> check every .5 of a second, otherwise check once every 5 seconds
+	if ((link_up && (millis() >= last_maintain_time + 500)) || millis() >= last_maintain_time + 5000){//if link is up -> check every half a second, otherwise check once every 5 seconds
 		byte status = Ethernet.maintain();
 		switch(status){
 			case 0:
